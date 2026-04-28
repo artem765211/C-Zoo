@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace GitHub_project
+namespace GitHub_project.Models
 {
     public abstract class Animal : IFeedable
     {

@@ -1,4 +1,5 @@
 ﻿using GitHub_project;
+using GitHub_project.Models;
 
 List<Animal> animals = new List<Animal>();
 void ShowOptions()
