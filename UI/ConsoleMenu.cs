@@ -18,14 +18,19 @@ namespace GitHub_project.UI
         { 
             while (true)
             {
+                Console.Clear();
                 ShowOptions();
                 string s_choice = Console.ReadLine();
                 if (!int.TryParse(s_choice, out int choice)) { Console.WriteLine("Invalid number"); return; }
                 switch (choice)
                 {
-                    case 1: OptionAddLion(); break;
+                    case 1: Console.Clear(); OptionAddLion(); break;
                     case 2: FeedAnimal(); break;
-                    case 3: ShowList(); break;
+                    case 3:
+                        Console.Clear(); 
+                        ShowList();
+                        Console.WriteLine("Enter random button");
+                        Console.ReadKey(); break;
                     case 4: return;
                     default:
                         Console.WriteLine("This command does not exist");
@@ -51,6 +56,8 @@ namespace GitHub_project.UI
             if (string.IsNullOrWhiteSpace(t_name)) { Console.WriteLine("ERROR: Name is empty"); return; }
             _service.AddLion(t_name);
             Console.WriteLine($"{t_name} added!");
+            Console.WriteLine("Enter random button");
+            Console.ReadKey();
         }
         private void ShowList()
         {
@@ -73,6 +80,8 @@ namespace GitHub_project.UI
             if (number < 1 || number > _service.Count) { Console.WriteLine("going beyond the list boundaries"); return; }
             if (!_service.FeedAnimal(number-1)) { Console.WriteLine("Lion couldn't feeded"); }
             else { Console.WriteLine("Lion feeded"); }
+            Console.WriteLine("Enter random button");
+            Console.ReadKey();
         }
     }
 }
