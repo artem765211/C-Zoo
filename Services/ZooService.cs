@@ -1,10 +1,24 @@
-﻿using System;
+﻿using GitHub_project.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace GitHub_project.Services
 {
-    internal class ZooService
+    public class ZooService
     {
+        private List<Animal> animals = new List<Animal>();
+
+        public void AddAnimal(string name) { animals.Add(new Lion(name)); }
+        public IReadOnlyList<Animal> GetAnimals() { return animals; }
+        public bool FeedAnimal(int index)
+        {
+            if (animals.Count == 0) return false;
+            if (index < 0 || index >= animals.Count) return false;
+            animals[index].Feed();
+            return true;
+        }
+        public int Count => animals.Count;
+
     }
 }
