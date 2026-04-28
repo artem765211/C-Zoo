@@ -9,11 +9,10 @@ namespace GitHub_project.Services
     {
         private List<Animal> animals = new List<Animal>();
 
-        public void AddAnimal(string name) { animals.Add(new Lion(name)); }
+        public void AddLion(string name) { animals.Add(new Lion(name)); }
         public IReadOnlyList<Animal> GetAnimals() { return animals; }
         public bool FeedAnimal(int index)
         {
-            if (animals.Count == 0) return false;
             if (index < 0 || index >= animals.Count) return false;
             animals[index].Feed();
             return true;

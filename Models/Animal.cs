@@ -9,7 +9,7 @@ namespace GitHub_project.Models
     {
 
         public string Name { get; }
-        public int Energy {get; private set;} = 100;
+        public int Energy {get; private set;} = 10;
 
         public Animal(string name)
         {
