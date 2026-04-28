@@ -12,3 +12,4 @@ C:\Users\Артем\source\repos\GitHub project\GitHub project\obj\Debug\net10.0
 C:\Users\Артем\source\repos\GitHub project\GitHub project\obj\Debug\net10.0\GitHub project.pdb
 C:\Users\Артем\source\repos\GitHub project\GitHub project\obj\Debug\net10.0\GitHub project.genruntimeconfig.cache
 C:\Users\Артем\source\repos\GitHub project\GitHub project\obj\Debug\net10.0\ref\GitHub project.dll
+C:\Users\Артем\source\repos\GitHub project\GitHub project\obj\Debug\net10.0\GitHub project.sourcelink.json
