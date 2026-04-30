@@ -31,7 +31,8 @@ namespace GitHub_project.UI
                          
                         ShowList();
                         break;
-                    case 5: return;
+                    case 5: AnimalSound(); break;
+                    case 6: return;
                     default:
                         Console.WriteLine("This command does not exist");
                         break;
@@ -46,7 +47,8 @@ namespace GitHub_project.UI
             Console.WriteLine("2. Add Dog");
             Console.WriteLine("3. Feed the animal");
             Console.WriteLine("4. Show List the animals");
-            Console.WriteLine("5. Exit");
+            Console.WriteLine("5. Make animal sound");
+            Console.WriteLine("6. Exit");
             Console.WriteLine("=========================");
         }
         private void OptionAddLion()
@@ -102,6 +104,23 @@ namespace GitHub_project.UI
         {
             Console.WriteLine("Enter any key");
             Console.ReadKey();
+        }
+        private void AnimalSound()
+        { 
+            Console.Clear();
+            PrintAnimals();
+            Console.WriteLine("Enter animal number: ");
+            string s_number = Console.ReadLine();
+            if (!int.TryParse(s_number, out int number))
+            {
+                Console.WriteLine("Invalid number!");
+                return;
+            }
+            if(number < 1 || number > _service.Count) { Console.WriteLine("going beyond the list boundaries"); Pause(); return; }
+            _service.AnimalSound(number-1);
+            Pause();
+
+
         }
     }
 }

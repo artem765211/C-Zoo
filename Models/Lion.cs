@@ -10,7 +10,7 @@ namespace GitHub_project.Models
 
         public override void MakeSound()
         {
-            Console.WriteLine($"{Name} growls");
+            Console.WriteLine($"{Name} growls!");
         }
         public override string Type() => "Lion";
     }
