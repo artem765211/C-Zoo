@@ -1,4 +1,5 @@
-﻿using GitHub_project.Models;
+﻿using GitHub_project.Design;
+using GitHub_project.Models;
 using GitHub_project.Services;
 using System;
 using System.Collections.Generic;
@@ -21,7 +22,7 @@ namespace GitHub_project.UI
                 Console.Clear();
                 ShowOptions();
                 string s_choice = Console.ReadLine();
-                if (!int.TryParse(s_choice, out int choice)) { Console.WriteLine("Invalid number"); continue; }
+                if (!int.TryParse(s_choice, out int choice)) { Logs.Error("Invalid number"); continue; }
                 switch (choice)
                 {
                     case 1:  OptionAddLion(); break;
@@ -34,7 +35,7 @@ namespace GitHub_project.UI
                     case 5: AnimalSound(); break;
                     case 6: return;
                     default:
-                        Console.WriteLine("This command does not exist");
+                        Logs.Error("This command does not exist");
                         break;
                 }
             }
@@ -54,27 +55,27 @@ namespace GitHub_project.UI
         private void OptionAddLion()
         {
             Console.Clear();
-            Console.Write("Enter the Lion's name: ");
+            Logs.Info("Enter the Lion's name: ");
             string t_name = Console.ReadLine();
-            if (string.IsNullOrWhiteSpace(t_name)) { Console.WriteLine("ERROR: Name is empty"); return; }
+            if (string.IsNullOrWhiteSpace(t_name)) { Logs.Error("Name is empty"); return; }
             _service.AddLion(t_name);
-            Console.WriteLine($"{t_name} added!");
+            Logs.Success($"{t_name} added!");
             Pause();
         }
         private void OptionAddDog()
         {
             Console.Clear();
-            Console.WriteLine("Enter the Dog's name: ");
+            Logs.Info("Enter the Dog's name: ");
             string t_name = Console.ReadLine();
-            if (string.IsNullOrWhiteSpace(t_name)) { Console.WriteLine("ERROR: Name is empty"); return; }
+            if (string.IsNullOrWhiteSpace(t_name)) { Logs.Error("Name is empty"); return; }
             _service.AddDog(t_name);
-            Console.WriteLine($"{t_name} added!");
+            Logs.Success($"{t_name} added!");
             Pause();
         }
         private void ShowList()
         {
             Console.Clear();
-            if (_service.Count == 0) { Console.WriteLine("List is empty"); Pause(); return; }
+            if (_service.Count == 0) { Logs.Info("List is empty"); Pause(); return; }
             PrintAnimals();
             Pause();
             
@@ -90,14 +91,14 @@ namespace GitHub_project.UI
         }
         private void FeedAnimal()
         {
-            if (_service.Count == 0){ Console.WriteLine("List is empty"); return; }
+            if (_service.Count == 0){ Logs.Info("List is empty"); return; }
             PrintAnimals();
-            Console.WriteLine("Enter animal number to feed");
+            Logs.Info("Enter animal number to feed");
             string s_number = Console.ReadLine();
-            if (!int.TryParse(s_number, out int number)) { Console.WriteLine("Invalid number"); return;  }
-            if (number < 1 || number > _service.Count) { Console.WriteLine("going beyond the list boundaries"); return; }
-            if (!_service.FeedAnimal(number-1)) { Console.WriteLine("Lion couldn't feeded"); }
-            else { Console.WriteLine("Lion feeded"); }
+            if (!int.TryParse(s_number, out int number)) { Logs.Error("Invalid number"); return;  }
+            if (number < 1 || number > _service.Count) { Logs.Error("ERROR: going beyond the list boundaries"); return; }
+            if (!_service.FeedAnimal(number-1)) { Logs.Error("Lion couldn't feeded"); }
+            else { Logs.Success("Lion feeded"); }
             Pause();
         }
         private void Pause()
@@ -109,14 +110,14 @@ namespace GitHub_project.UI
         { 
             Console.Clear();
             PrintAnimals();
-            Console.WriteLine("Enter animal number: ");
+            Logs.Info("Enter animal number: ");
             string s_number = Console.ReadLine();
             if (!int.TryParse(s_number, out int number))
             {
-                Console.WriteLine("Invalid number!");
+                Logs.Error("Invalid number!");
                 return;
             }
-            if(number < 1 || number > _service.Count) { Console.WriteLine("going beyond the list boundaries"); Pause(); return; }
+            if(number < 1 || number > _service.Count) { Logs.Error("going beyond the list boundaries"); Pause(); return; }
             _service.AnimalSound(number-1);
             Pause();
 
