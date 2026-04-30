@@ -10,6 +10,7 @@ namespace GitHub_project.Services
         private List<Animal> animals = new List<Animal>();
 
         public void AddLion(string name) { animals.Add(new Lion(name)); }
+        public void AddDog(string name) { animals.Add(new Dog(name)); }
         public IReadOnlyList<Animal> GetAnimals() { return animals; }
         public bool FeedAnimal(int index)
         {

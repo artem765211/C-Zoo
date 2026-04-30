@@ -23,5 +23,6 @@ namespace GitHub_project.Models
         }
 
         public abstract void MakeSound();
+        public abstract string Type();
     }
 }

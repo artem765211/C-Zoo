@@ -4,14 +4,14 @@ using System.Text;
 
 namespace GitHub_project.Models
 {
-    public class Lion : Animal
+    public class Dog : Animal
     {
-        public Lion(string name) : base(name) { }
+        public Dog(string name) : base(name) { }
 
         public override void MakeSound()
         {
-            Console.WriteLine($"{Name} growls");
+            Console.WriteLine($"{Name} barks!");
         }
-        public override string Type() => "Lion";
+        public override string Type() => "Dog";
     }
 }
