@@ -50,6 +50,23 @@ public class AnimalRepository
         int last_insert_rowid = Convert.ToInt32(command2.ExecuteScalar());
         animal.id = last_insert_rowid;
     }
+    public void UpdateAnimalEnergy(int energy, int id)
+    {
+        using var connection = new SqliteConnection(ConnectionString);
+        connection.Open();
+
+        var command = connection.CreateCommand();
+        command.CommandText =
+            """
+            UPDATE Animals
+            SET Energy = $energy
+            WHERE id = @id
+            """;
+        command.Parameters.AddWithValue("$energy", energy);
+        command.Parameters.AddWithValue("@id", id);
+        
+        command.ExecuteNonQuery();
+    }
     public void RemoveAnimal(int id)
     {
         using var connection = new SqliteConnection(ConnectionString);

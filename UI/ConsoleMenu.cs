@@ -101,7 +101,7 @@ namespace GitHub_project.UI
             string s_number = Console.ReadLine();
             if (!int.TryParse(s_number, out int number)) { Logs.Error("Invalid number");Pause(); return; }
             if (number < 0) { Logs.Error("ID не может быть меньше 0"); Pause(); return; }
-            if (!_service.FeedAnimal(number - 1)) { Logs.Error("Lion couldn't feeded"); }
+            if (!_service.FeedAnimal(number)) { Logs.Error("Lion couldn't feeded"); }
             else { Logs.Success("Lion feeded"); }
             Pause();
         }

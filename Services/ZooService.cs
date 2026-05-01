@@ -30,10 +30,14 @@ namespace GitHub_project.Services
             animals.Add(dogAnimal);
         }
         public IReadOnlyList<Animal> GetAnimals() { return animals; }
-        public bool FeedAnimal(int index)
+        public bool FeedAnimal(int id)
         {
-            if (index < 0 || index >= animals.Count) return false;
-            animals[index].Feed();
+            if (id < 0) return false;
+            
+            var animal = animals.FirstOrDefault(a => a.id == id);
+            if(animal == null) return false;
+            animal.Feed();
+            _repository.UpdateAnimalEnergy(animal.Energy, id);
             return true;
         }
         public int Count => animals.Count;
