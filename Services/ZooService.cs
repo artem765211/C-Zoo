@@ -28,6 +28,11 @@ namespace GitHub_project.Services
         {
             animals.RemoveAt(index);
         }
+        public Animal CheckName(string name)
+        {
+            foreach (var animal in animals) { if (name == animal.Name) return animal; }
+            return null;
+        }
 
     }
 }

@@ -33,8 +33,9 @@ namespace GitHub_project.UI
                         ShowList();
                         break;
                     case 5: AnimalSound(); break;
-                    case 6: RemoveAnimal(); break;
-                    case 7: return;
+                    case 6: SearchOfName();break;
+                    case 7: RemoveAnimal(); break;
+                    case 8: return;
                     default:
                         Logs.Error("This command does not exist");
                         break;
@@ -50,8 +51,9 @@ namespace GitHub_project.UI
             Console.WriteLine("3. Feed the animal");
             Console.WriteLine("4. Show List the animals");
             Console.WriteLine("5. Make animal sound");
-            Console.WriteLine("6. Remove animal");
-            Console.WriteLine("7. Exit");
+            Console.WriteLine("6. Search animal");
+            Console.WriteLine("7. Remove animal");
+            Console.WriteLine("8. Exit");
             Console.WriteLine("=========================");
         }
         private void OptionAddLion()
@@ -139,6 +141,17 @@ namespace GitHub_project.UI
             string temp_name = animal[remove_number - 1].Name;
             _service.RemoveAnimal(remove_number - 1);
             Logs.Success($"{temp_name} удалено из списка!");
+            Pause();
+        }
+        private void SearchOfName()
+        {
+            Console.Clear();
+            if (CheckIfEmpty()) return;
+            Console.WriteLine("Enter animal name:");
+            string s_animalname = Console.ReadLine();
+            Animal checkanimal = _service.CheckName(s_animalname);
+            if (checkanimal == null) { Logs.Error("Животного с данным именем нет в списке"); Pause(); return; }
+            Logs.Info($"{checkanimal.Type()} | {checkanimal.Name} | Energy: {checkanimal.Energy}");
             Pause();
         }
         private bool CheckIfEmpty()
