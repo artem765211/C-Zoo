@@ -118,8 +118,7 @@ namespace GitHub_project.UI
                 Pause();
                 return;
             }
-            if (number < 0) { Logs.Error("ID не может быть меньше 0"); Pause(); return; }
-            _service.AnimalSound(number);
+            if(!_service.AnimalSound(number)) { Logs.Error("Животное не найдено"); Pause(); return; };
             Pause();
         }
         private void RemoveAnimal()

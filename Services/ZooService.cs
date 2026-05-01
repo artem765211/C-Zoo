@@ -42,9 +42,13 @@ namespace GitHub_project.Services
         }
         public int Count => animals.Count;
         public string GetName(int index) => animals[index].Name;
-        public void AnimalSound(int index)
+        public bool AnimalSound(int index)
         {
-            animals[index].MakeSound();
+            if(index < 0) return false;
+            var animal = animals.FirstOrDefault(a => a.id == index);
+            if (animal == null) return false;
+            animal.MakeSound(); 
+            return true;
         }
         public Animal RemoveAnimal(int index)
         {
