@@ -1,0 +1,13 @@
+# build
+bin/
+obj/
+
+# Visual Studio
+.vs/
+
+# SQLite
+*.db
+
+# user files
+*.user
+*.suo

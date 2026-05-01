@@ -1,4 +1,5 @@
 ﻿using GitHub_project.Models;
+using GitHub_project.Data;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,9 +9,19 @@ namespace GitHub_project.Services
     public class ZooService
     {
         private List<Animal> animals = new List<Animal>();
+        private readonly AnimalRepository _repository;
+        public ZooService(AnimalRepository repository) {  _repository = repository; }
 
-        public void AddLion(string name) { animals.Add(new Lion(name)); }
-        public void AddDog(string name) { animals.Add(new Dog(name)); }
+        public void AddLion(string name) 
+        { 
+            animals.Add(new Lion(name));
+            _repository.AddAnimal(new Lion(name));
+        }
+        public void AddDog(string name) 
+        { 
+            animals.Add(new Dog(name));
+            _repository.AddAnimal(new Dog(name));
+        }
         public IReadOnlyList<Animal> GetAnimals() { return animals; }
         public bool FeedAnimal(int index)
         {
