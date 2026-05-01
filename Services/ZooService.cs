@@ -18,14 +18,16 @@ namespace GitHub_project.Services
         }
 
         public void AddLion(string name) 
-        { 
-            animals.Add(new Lion(name));
-            _repository.AddAnimal(new Lion(name));
+        {
+            Lion lionAnimal = new Lion(name);
+            _repository.AddAnimal(lionAnimal);
+            animals.Add(lionAnimal);
         }
         public void AddDog(string name) 
-        { 
-            animals.Add(new Dog(name));
-            _repository.AddAnimal(new Dog(name));
+        {
+            Dog dogAnimal = new Dog(name);
+            _repository.AddAnimal(dogAnimal);
+            animals.Add(dogAnimal);
         }
         public IReadOnlyList<Animal> GetAnimals() { return animals; }
         public bool FeedAnimal(int index)
@@ -40,15 +42,19 @@ namespace GitHub_project.Services
         {
             animals[index].MakeSound();
         }
-        public void RemoveAnimal(int index)
+        public Animal RemoveAnimal(int index)
         {
-            animals.RemoveAt(index);
+            var animal = animals.FirstOrDefault(a => a.id == index);
+            _repository.RemoveAnimal(index);
+            animals.Remove(animal);
+            return animal;
         }
         public Animal CheckName(string name)
         {
             foreach (var animal in animals) { if (animal.Name.Equals(name,StringComparison.OrdinalIgnoreCase)) return animal; }
             return null;
         }
+
 
     }
 }

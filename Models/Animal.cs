@@ -7,7 +7,7 @@ namespace GitHub_project.Models
 {
     public abstract class Animal : IFeedable
     {
-
+        public int id { get; set; }
         public string Name { get; }
         public int Energy {get; set;} = 10;
 

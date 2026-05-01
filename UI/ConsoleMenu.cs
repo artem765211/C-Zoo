@@ -89,7 +89,7 @@ namespace GitHub_project.UI
             int i = 1;
             foreach (var item in _service.GetAnimals())
             {
-                Console.WriteLine($"{i}. | {item.Type()} | {item.Name} | Energy: {item.Energy}");
+                Console.WriteLine($"{item.id}. | {item.Type()} | {item.Name} | Energy: {item.Energy}");
                 i++;
             }
         }
@@ -100,7 +100,7 @@ namespace GitHub_project.UI
             Logs.Info("Enter animal number to feed");
             string s_number = Console.ReadLine();
             if (!int.TryParse(s_number, out int number)) { Logs.Error("Invalid number");Pause(); return; }
-            if (number < 1 || number > _service.Count) { Logs.Error("ERROR: going beyond the list boundaries"); return; }
+            if (number < 0) { Logs.Error("ID не может быть меньше 0"); Pause(); return; }
             if (!_service.FeedAnimal(number - 1)) { Logs.Error("Lion couldn't feeded"); }
             else { Logs.Success("Lion feeded"); }
             Pause();
@@ -118,8 +118,8 @@ namespace GitHub_project.UI
                 Pause();
                 return;
             }
-            if (number < 1 || number > _service.Count) { Logs.Error("going beyond the list boundaries"); Pause(); return; }
-            _service.AnimalSound(number - 1);
+            if (number < 0) { Logs.Error("ID не может быть меньше 0"); Pause(); return; }
+            _service.AnimalSound(number);
             Pause();
         }
         private void RemoveAnimal()
@@ -135,12 +135,10 @@ namespace GitHub_project.UI
                 Pause();
                 return;
             }
-            if (remove_number < 1 || remove_number > _service.Count) { Logs.Error("going beyond the list boundaries"); Pause(); return; }
-
-            var animal = _service.GetAnimals();
-            string temp_name = animal[remove_number - 1].Name;
-            _service.RemoveAnimal(remove_number - 1);
-            Logs.Success($"{temp_name} удалено из списка!");
+            if (remove_number < 0) { Logs.Error("ID не может быть меньше 0"); Pause(); return; }
+            Animal removedAnimal = _service.RemoveAnimal(remove_number);
+            if (removedAnimal == null) { Logs.Error("Животное с таким id не найдено в списке"); Pause(); return; }
+            Logs.Success($"{removedAnimal.Name} удалено из списка!");
             Pause();
         }
         private void SearchOfName()
