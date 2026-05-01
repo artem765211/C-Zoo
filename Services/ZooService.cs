@@ -30,7 +30,7 @@ namespace GitHub_project.Services
         }
         public Animal CheckName(string name)
         {
-            foreach (var animal in animals) { if (name == animal.Name) return animal; }
+            foreach (var animal in animals) { if (animal.Name.Equals(name,StringComparison.OrdinalIgnoreCase)) return animal; }
             return null;
         }
 
