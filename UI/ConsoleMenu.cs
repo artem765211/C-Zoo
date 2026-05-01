@@ -33,7 +33,8 @@ namespace GitHub_project.UI
                         ShowList();
                         break;
                     case 5: AnimalSound(); break;
-                    case 6: return;
+                    case 6: RemoveAnimal(); break;
+                    case 7: return;
                     default:
                         Logs.Error("This command does not exist");
                         break;
@@ -49,7 +50,8 @@ namespace GitHub_project.UI
             Console.WriteLine("3. Feed the animal");
             Console.WriteLine("4. Show List the animals");
             Console.WriteLine("5. Make animal sound");
-            Console.WriteLine("6. Exit");
+            Console.WriteLine("6. Remove animal");
+            Console.WriteLine("7. Exit");
             Console.WriteLine("=========================");
         }
         private void OptionAddLion()
@@ -122,6 +124,32 @@ namespace GitHub_project.UI
             Pause();
 
 
+        }
+        private void RemoveAnimal()
+        {
+            Console.Clear();
+            if (_service.Count == 0)
+            {
+                Logs.Error("List is empty");
+                Pause();
+                return;
+            }
+            PrintAnimals();
+            Console.WriteLine("Enter animal number:");
+            string s_remove_number = Console.ReadLine();
+            if (!int.TryParse(s_remove_number, out int remove_number))
+            {
+                Logs.Error("Invalid number!");
+                Pause();
+                return;
+            }
+            if(remove_number < 1 || remove_number > _service.Count) { Logs.Error("going beyond the list boundaries"); Pause(); return; }
+            
+            var animal = _service.GetAnimals();
+            string temp_name = animal[remove_number-1].Name;
+            _service.RemoveAnimal(remove_number - 1);
+            Logs.Success($"{temp_name} удалено из списка!");
+            Pause();
         }
     }
 }
