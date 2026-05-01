@@ -44,4 +44,41 @@ public class AnimalRepository
 
         command.ExecuteNonQuery();
     }
+    public List<Animal> GetAllAnimals()
+    {
+        var animals = new List<Animal>();
+        using var connection = new SqliteConnection(ConnectionString);
+        connection.Open();
+
+        var command = connection.CreateCommand();
+        command.CommandText = "SELECT Name,Type,Energy FROM Animals";
+
+        using var reader = command.ExecuteReader();
+
+        while (reader.Read())
+        {
+            string name = reader.GetString(0);
+            string type = reader.GetString(1);
+            int energy = reader.GetInt32(2);
+
+            Animal animal;
+
+            if(type == "Lion")
+            {
+                animal = new Lion(name);
+            }
+            else if (type =="Dog")
+            {
+                animal = new Dog(name);
+            }
+
+            else { continue; }
+
+            animal.Energy = energy;
+
+            animals.Add(animal);
+
+        }
+        return animals;
+    }
 }

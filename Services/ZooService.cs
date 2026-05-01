@@ -8,9 +8,14 @@ namespace GitHub_project.Services
 {
     public class ZooService
     {
-        private List<Animal> animals = new List<Animal>();
+        
         private readonly AnimalRepository _repository;
-        public ZooService(AnimalRepository repository) {  _repository = repository; }
+        private List<Animal> animals = new List<Animal>();
+        public ZooService(AnimalRepository repository) 
+        { 
+            _repository = repository;
+            animals = _repository.GetAllAnimals();
+        }
 
         public void AddLion(string name) 
         { 
